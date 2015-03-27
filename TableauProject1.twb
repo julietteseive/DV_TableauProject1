@@ -439,6 +439,69 @@
     </datasource>
   </datasources>
   <worksheets>
+    <worksheet name='ReproducePlot2'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='ORDERS+ (DV_ORDERS)' name='oracle.42090.410961493100' />
+          </datasources>
+          <datasource-dependencies datasource='oracle.42090.410961493100'>
+            <column caption='Customer State' datatype='string' name='[CUSTOMER_STATE]' role='dimension' type='nominal'>
+            </column>
+            <column caption='Order Date' datatype='datetime' name='[ORDER_DATE]' role='dimension' type='ordinal'>
+            </column>
+            <column caption='Shipped Date' datatype='datetime' name='[SHIPPED_DATE]' role='dimension' type='ordinal'>
+            </column>
+            <column caption='Title' datatype='string' name='[TITLE]' role='dimension' type='nominal'>
+            </column>
+            <column-instance column='[ORDER_DATE]' derivation='Month' name='[mn:ORDER_DATE:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[SHIPPED_DATE]' derivation='Month' name='[mn:SHIPPED_DATE:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[CUSTOMER_STATE]' derivation='None' name='[none:CUSTOMER_STATE:nk]' pivot='key' type='nominal' />
+            <column-instance column='[TITLE]' derivation='None' name='[none:TITLE:nk]' pivot='key' type='nominal' />
+            <column-instance column='[SHIPPED_DATE]' derivation='Year' name='[yr:SHIPPED_DATE:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='width' field='[oracle.42090.410961493100].[yr:SHIPPED_DATE:qk]' value='64' />
+            <format attr='width' field='[oracle.42090.410961493100].[mn:SHIPPED_DATE:qk]' value='64' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-format' field='[oracle.42090.410961493100].[mn:SHIPPED_DATE:qk]' value='iLLL' />
+            <format attr='text-format' field='[oracle.42090.410961493100].[yr:SHIPPED_DATE:qk]' value='iyyyy' />
+            <format attr='text-format' field='[oracle.42090.410961493100].[mn:ORDER_DATE:qk]' value='iLLL' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='2'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[oracle.42090.410961493100].[none:TITLE:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='131' />
+                <format attr='maxwidth' value='131' />
+                <format attr='minheight' value='475' />
+                <format attr='maxheight' value='475' />
+                <format attr='aspect' value='0' />
+                <format attr='minwidth' value='131' />
+                <format attr='maxwidth' value='131' />
+                <format attr='minheight' value='475' />
+                <format attr='maxheight' value='475' />
+                <format attr='aspect' value='0' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[oracle.42090.410961493100].[mn:SHIPPED_DATE:qk]</rows>
+        <cols>([oracle.42090.410961493100].[none:CUSTOMER_STATE:nk] * [oracle.42090.410961493100].[mn:ORDER_DATE:qk])</cols>
+      </table>
+    </worksheet>
     <worksheet name='ReproducingPlot1'>
       <table>
         <view>
@@ -532,69 +595,6 @@
         <cols>([oracle.42090.410961493100].[none:CUSTOMER_STATE:nk] * [oracle.42090.410961493100].[mn:ORDER_DATE:qk])</cols>
       </table>
     </worksheet>
-    <worksheet name='Sheet 2'>
-      <table>
-        <view>
-          <datasources>
-            <datasource caption='ORDERS+ (DV_ORDERS)' name='oracle.42090.410961493100' />
-          </datasources>
-          <datasource-dependencies datasource='oracle.42090.410961493100'>
-            <column caption='Customer State' datatype='string' name='[CUSTOMER_STATE]' role='dimension' type='nominal'>
-            </column>
-            <column caption='Order Date' datatype='datetime' name='[ORDER_DATE]' role='dimension' type='ordinal'>
-            </column>
-            <column caption='Shipped Date' datatype='datetime' name='[SHIPPED_DATE]' role='dimension' type='ordinal'>
-            </column>
-            <column caption='Title' datatype='string' name='[TITLE]' role='dimension' type='nominal'>
-            </column>
-            <column-instance column='[ORDER_DATE]' derivation='Month' name='[mn:ORDER_DATE:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[SHIPPED_DATE]' derivation='Month' name='[mn:SHIPPED_DATE:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[CUSTOMER_STATE]' derivation='None' name='[none:CUSTOMER_STATE:nk]' pivot='key' type='nominal' />
-            <column-instance column='[TITLE]' derivation='None' name='[none:TITLE:nk]' pivot='key' type='nominal' />
-            <column-instance column='[SHIPPED_DATE]' derivation='Year' name='[yr:SHIPPED_DATE:qk]' pivot='key' type='quantitative' />
-          </datasource-dependencies>
-          <aggregation value='true' />
-        </view>
-        <style>
-          <style-rule element='axis'>
-            <format attr='width' field='[oracle.42090.410961493100].[yr:SHIPPED_DATE:qk]' value='64' />
-            <format attr='width' field='[oracle.42090.410961493100].[mn:SHIPPED_DATE:qk]' value='64' />
-          </style-rule>
-          <style-rule element='label'>
-            <format attr='text-format' field='[oracle.42090.410961493100].[mn:SHIPPED_DATE:qk]' value='iLLL' />
-            <format attr='text-format' field='[oracle.42090.410961493100].[yr:SHIPPED_DATE:qk]' value='iyyyy' />
-            <format attr='text-format' field='[oracle.42090.410961493100].[mn:ORDER_DATE:qk]' value='iLLL' />
-          </style-rule>
-        </style>
-        <panes>
-          <pane id='2'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Circle' />
-            <encodings>
-              <color column='[oracle.42090.410961493100].[none:TITLE:nk]' />
-            </encodings>
-            <style>
-              <style-rule element='pane'>
-                <format attr='minwidth' value='131' />
-                <format attr='maxwidth' value='131' />
-                <format attr='minheight' value='475' />
-                <format attr='maxheight' value='475' />
-                <format attr='aspect' value='0' />
-                <format attr='minwidth' value='131' />
-                <format attr='maxwidth' value='131' />
-                <format attr='minheight' value='475' />
-                <format attr='maxheight' value='475' />
-                <format attr='aspect' value='0' />
-              </style-rule>
-            </style>
-          </pane>
-        </panes>
-        <rows>[oracle.42090.410961493100].[mn:SHIPPED_DATE:qk]</rows>
-        <cols>([oracle.42090.410961493100].[none:CUSTOMER_STATE:nk] * [oracle.42090.410961493100].[mn:ORDER_DATE:qk])</cols>
-      </table>
-    </worksheet>
   </worksheets>
   <windows>
     <window class='schema' source-height='-1' />
@@ -626,7 +626,7 @@
         </color-one-way>
       </highlight>
     </window>
-    <window auto-hidden='0' class='worksheet' maximized='1' name='Sheet 2'>
+    <window auto-hidden='0' class='worksheet' maximized='1' name='ReproducePlot2'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -802,7 +802,7 @@
       J/lsHqW0xHgiQ09nPYMj07S1NlNXF8Us5bnU108o2kAs6GJ4LE5jUyPlgkZ6PsGWHXsJV63t
       Wb9fW805wP8HUAsyjGWsHA8AAAAASUVORK5CYII=
     </thumbnail>
-    <thumbnail height='192' name='Sheet 2' width='192'>
+    <thumbnail height='192' name='ReproducePlot2' width='192'>
       iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAAsTAAALEwEAmpwY
       AAAgAElEQVR4nO2d+XMc14HfPz33gZnBMYOTxEGAJChSIimRsmQdFGNJlnzKTrxr51jbSVXi
       yi9JdvPDuvIX7G4qVU6lKuWqbLzl3Y291m1KokxR4iVKokQSvG8S9zGYAeY+evrKD9DAJAES
